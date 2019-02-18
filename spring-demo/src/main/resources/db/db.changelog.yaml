@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: changelog/1.0.0/01-categoria.sql
+      file: changelog/1.0.0/01-categorias.sql
       relativeToChangelogFile: true
