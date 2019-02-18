@@ -4,10 +4,10 @@ import com.canuto.demo.domain.Categoria;
 import com.canuto.demo.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.UUID;
 
 
 @RestController
@@ -21,9 +21,14 @@ public class CategoriaResource {
         this.categoriaService = categoriaService;
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> listar(@PathVariable Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> listar(@PathVariable UUID id){
         Categoria categoria = categoriaService.buscar(id);
         return ResponseEntity.ok().body(categoria);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> criar(@Valid @RequestBody Categoria categoria){
+        return ResponseEntity.ok().body(categoriaService.gravar(categoria));
     }
 }

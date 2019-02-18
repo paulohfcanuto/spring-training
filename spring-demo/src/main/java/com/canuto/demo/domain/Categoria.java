@@ -1,39 +1,27 @@
 package com.canuto.demo.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.UUID;
 
-@Entity(name ="categoria")
-public class Categoria implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Entity
+@Table(name = "Categorias")
+public class Categoria {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-
+    @Column(name = "NOME")
     private String nome;
 
     public Categoria() {
     }
 
-    public Categoria(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
-
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -41,18 +29,5 @@ public class Categoria implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Categoria categoria = (Categoria) o;
-        return id.equals(categoria.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

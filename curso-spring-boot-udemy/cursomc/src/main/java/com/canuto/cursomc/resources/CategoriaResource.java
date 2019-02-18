@@ -4,10 +4,7 @@ import com.canuto.cursomc.domain.Categoria;
 import com.canuto.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -21,7 +18,7 @@ public class CategoriaResource {
         this.categoriaService = categoriaService;
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @GetMapping("/{id}")
     public ResponseEntity<?> listar(@PathVariable Integer id){
         Categoria categoria = categoriaService.buscar(id);
         return ResponseEntity.ok().body(categoria);

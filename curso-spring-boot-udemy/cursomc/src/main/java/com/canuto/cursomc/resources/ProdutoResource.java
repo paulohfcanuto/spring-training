@@ -4,10 +4,7 @@ import com.canuto.cursomc.domain.Produto;
 import com.canuto.cursomc.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value="/produtos")
@@ -20,7 +17,7 @@ public class ProdutoResource {
         this.produtoService = produtoService;
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @GetMapping("/{id}")
     public ResponseEntity<?> listar(@PathVariable Integer id){
         Produto produto = produtoService.buscar(id);
         return ResponseEntity.ok().body(produto);
