@@ -5,8 +5,10 @@ import com.canuto.demo.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.UUID;
 
 
@@ -29,6 +31,9 @@ public class CategoriaResource {
 
     @PostMapping
     public ResponseEntity<?> criar(@Valid @RequestBody Categoria categoria){
-        return ResponseEntity.ok().body(categoriaService.gravar(categoria));
+        Categoria categoriaCriada = categoriaService.gravar(categoria);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(categoriaCriada.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }

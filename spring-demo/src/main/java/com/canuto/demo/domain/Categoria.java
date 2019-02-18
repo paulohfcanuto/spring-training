@@ -22,7 +22,6 @@ public class Categoria {
         return id;
     }
 
-
     public String getNome() {
         return nome;
     }
