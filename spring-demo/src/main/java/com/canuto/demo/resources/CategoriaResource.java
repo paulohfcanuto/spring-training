@@ -9,7 +9,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Collection;
 import java.util.UUID;
+import java.util.stream.StreamSupport;
 
 
 @RestController
@@ -35,5 +37,16 @@ public class CategoriaResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(categoriaCriada.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<?> listar(@PathVariable String nome){
+        Iterable<Categoria> categoria = categoriaService.buscarPorNome(nome);
+
+        if (StreamSupport.stream(categoria.spliterator(), false).count() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(categoria);
     }
 }
