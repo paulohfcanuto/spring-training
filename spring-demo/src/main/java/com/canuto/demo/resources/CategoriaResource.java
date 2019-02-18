@@ -1,6 +1,7 @@
 package com.canuto.demo.resources;
 
 import com.canuto.demo.domain.Categoria;
+import com.canuto.demo.exception.NotFoundException;
 import com.canuto.demo.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +45,7 @@ public class CategoriaResource {
         Iterable<Categoria> categoria = categoriaService.buscarPorNome(nome);
 
         if (StreamSupport.stream(categoria.spliterator(), false).count() == 0) {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Categoria " + nome + " não encontrada.");
         }
 
         return ResponseEntity.ok().body(categoria);
