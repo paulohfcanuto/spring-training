@@ -1,17 +1,17 @@
 package com.canuto.demo.resources;
 
 import com.canuto.demo.domain.Categoria;
-import com.canuto.demo.exception.NotFoundException;
 import com.canuto.demo.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
-import java.util.stream.StreamSupport;
 
 
 @RestController
@@ -26,7 +26,7 @@ public class CategoriaResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> listar(@PathVariable UUID id){
+    public ResponseEntity<?> listarPorId(@PathVariable UUID id){
         Categoria categoria = categoriaService.buscar(id);
         return ResponseEntity.ok().body(categoria);
     }
@@ -39,14 +39,9 @@ public class CategoriaResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping("/nome/{nome}")
-    public ResponseEntity<?> listar(@PathVariable String nome){
-        Iterable<Categoria> categoria = categoriaService.buscarPorNome(nome);
-
-        if (StreamSupport.stream(categoria.spliterator(), false).count() == 0) {
-            throw new NotFoundException("Categoria " + nome + " não encontrada.");
-        }
-
-        return ResponseEntity.ok().body(categoria);
+    @GetMapping()
+    public ResponseEntity<?> listarTodosPorNome(@NonNull @RequestParam(value="nome") String nome) {
+        List<Categoria> categorias = categoriaService.buscarPorNome(nome);
+        return ResponseEntity.ok().body(categorias);
     }
 }

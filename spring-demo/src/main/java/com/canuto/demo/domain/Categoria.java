@@ -1,9 +1,18 @@
 package com.canuto.demo.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Categorias")
 public class Categoria {
 
@@ -14,19 +23,4 @@ public class Categoria {
 
     @Column(name = "NOME")
     private String nome;
-
-    public Categoria() {
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }
