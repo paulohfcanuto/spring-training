@@ -1,4 +1,4 @@
-package com.canuto.demo.resources;
+package com.canuto.demo.controller;
 
 import com.canuto.demo.domain.Categoria;
 import com.canuto.demo.domain.dto.CategoriaDto;
