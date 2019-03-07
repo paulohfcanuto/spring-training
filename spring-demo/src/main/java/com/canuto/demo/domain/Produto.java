@@ -12,8 +12,8 @@ import java.util.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "CATEGORIAS")
-public class Categoria {
+@Table(name = "PRODUTOS")
+public class Produto {
 
     @Id
     @Column(name = "ID")
@@ -23,12 +23,10 @@ public class Categoria {
     @Column(name = "NOME")
     private String nome;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "CATEGORIAS")
-    private Set<ProdutoCategoria> produtos;
+    @Column(name = "PRECO")
+    private Double preco;
 
-    public Categoria(UUID id, String nome) {
-        this.id = id;
-        this.nome = nome;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "PRODUTOS")
+    private Set<ProdutoCategoria> categorias;
 }

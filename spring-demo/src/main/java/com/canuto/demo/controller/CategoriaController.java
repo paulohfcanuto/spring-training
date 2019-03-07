@@ -17,12 +17,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value="/categorias")
-public class CategoriaResource {
+public class CategoriaController {
 
     private final CategoriaService categoriaService;
 
     @Autowired
-    public CategoriaResource(CategoriaService categoriaService) {
+    public CategoriaController(CategoriaService categoriaService) {
         this.categoriaService = categoriaService;
     }
 

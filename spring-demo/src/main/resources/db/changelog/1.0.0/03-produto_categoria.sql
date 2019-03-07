@@ -1,0 +1,21 @@
+--liquibase formatted sql
+
+--changeset paulohfcanuto:1
+CREATE TABLE DEMO.PRODUTO_CATEGORIA (
+  ID UUID NOT NULL CONSTRAINT PK_PRODUTO_CATEGORIA PRIMARY KEY DEFAULT DEMO.uuid_generate_v4(),
+  PRODUTO_ID UUID NOT NULL,
+  CATEGORIA_ID UUID NOT NULL
+);
+--rollback DROP TABLE PRODUTO_CATEGORIA;
+
+--changeset paulohfcanuto:2
+COMMENT ON TABLE DEMO.PRODUTO_CATEGORIA IS 'Relação entre produtos e categorias';
+COMMENT ON COLUMN DEMO.PRODUTO_CATEGORIA.ID IS 'Chave da relação';
+COMMENT ON COLUMN DEMO.PRODUTO_CATEGORIA.PRODUTO_ID IS 'Id do produto';
+COMMENT ON COLUMN DEMO.PRODUTO_CATEGORIA.CATEGORIA_ID IS 'id da categoria';
+--rollback not required;
+
+
+--changeset paulohfcanuto:3
+GRANT SELECT, INSERT, UPDATE, DELETE ON DEMO.PRODUTO_CATEGORIA TO DEMO_API_SYSTEM;
+--rollback not required;

@@ -2,3 +2,11 @@ databaseChangeLog:
   - include:
       file: changelog/1.0.0/01-categorias.sql
       relativeToChangelogFile: true
+
+  - include:
+      file: changelog/1.0.0/02-produtos.sql
+      relativeToChangelogFile: true
+
+  - include:
+      file: changelog/1.0.0/03-produto_categoria.sql
+      relativeToChangelogFile: true
